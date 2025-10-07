@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_email">
+    <sys_script_email action="INSERT_OR_UPDATE">
+        <name>x_cdltd_loaner_req_loaner_request_script_1</name>
+        <new_lines_to_html>false</new_lines_to_html>
+        <script><![CDATA[if (current.item_type == 'cmdb_ci_computer') {
+        var request = new sn_ws.RESTMessageV2();
+        request.setEndpoint('https://nowlearning-nlinst03344858-1sksv-0001.lab.service-now.com/api/now/table/u_password_vault?sysparm_query=u_asset%3D' + current.cmdb_ci.asset_tag + '&sysparm_fields=u_password&sysparm_limit=1');
+        request.setHttpMethod('GET');
+        //Eg. UserName="admin", Password="admin" for this code sample.
+        var user = 'admin';
+        var password = '5QcbECH1CGJt';
+        request.setBasicAuth(user, password);
+        request.setRequestHeader("Accept", "application/json");
+        var response = request.execute();
+        var obj = JSON.parse(response.getBody());
+        var myPass = obj.result[0].u_password;
+        template.print('u_password: ' + myPass);
+    }]]></script>
+        <sys_class_name>sys_script_email</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-10-07 21:36:50</sys_created_on>
+        <sys_id>5adee9cc9f6032107f44be3f2524ab9b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_cdltd_loaner_req_loaner_request_script_1</sys_name>
+        <sys_package display_value="Loaner Request" source="x_cdltd_loaner_req">2c8a2c6b9f0032107f44bfd64024abc9</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Loaner Request">2c8a2c6b9f0032107f44bfd64024abc9</sys_scope>
+        <sys_update_name>sys_script_email_5adee9cc9f6032107f44be3f2524ab9b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-10-07 21:36:50</sys_updated_on>
+    </sys_script_email>
+</record_update>
